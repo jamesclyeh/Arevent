@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/build/intermediates/res/merged/debug/anim/bottom_down.xml",
+        "source": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/anim/bottom_down.xml"
+    },
+    {
+        "merged": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/build/intermediates/res/merged/debug/anim/bottom_up.xml",
+        "source": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/anim/bottom_up.xml"
+    }
+]
