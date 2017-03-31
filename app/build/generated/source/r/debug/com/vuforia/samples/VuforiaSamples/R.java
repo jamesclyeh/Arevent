@@ -68,7 +68,9 @@ public final class R {
         public static final int camera_button=0x7f09000f;
         public static final int camera_overlay_layout=0x7f090004;
         public static final int card_layout=0x7f090011;
-        public static final int instance_image=0x7f090012;
+        public static final int instance_image1=0x7f090012;
+        public static final int instance_image2=0x7f090013;
+        public static final int instance_image3=0x7f090014;
         public static final int leftMargin=0x7f090009;
         public static final int loading_indicator=0x7f090005;
         public static final int loading_layout=0x7f09000d;
@@ -82,8 +84,6 @@ public final class R {
         public static final int settings_menu=0x7f090017;
         public static final int settings_menu_title=0x7f090018;
         public static final int splash_image=0x7f090019;
-        public static final int text_type=0x7f090013;
-        public static final int text_value=0x7f090014;
         public static final int topMargin=0x7f090007;
         public static final int wordList=0x7f09000c;
     }

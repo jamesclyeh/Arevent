@@ -595,8 +595,8 @@
                     "startLine": 51,
                     "startColumn": 4,
                     "startOffset": 4682,
-                    "endColumn": 72,
-                    "endOffset": 4750
+                    "endColumn": 74,
+                    "endOffset": 4752
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -606,47 +606,33 @@
                 "to": {
                     "startLine": 52,
                     "startColumn": 4,
-                    "startOffset": 4755,
+                    "startOffset": 4757,
                     "endColumn": 71,
-                    "endOffset": 4822
+                    "endOffset": 4824
                 },
                 "from": {
-                    "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 101,
-                        "endColumn": 71,
-                        "endOffset": 168
-                    }
+                    "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
                 }
             },
             {
                 "to": {
                     "startLine": 53,
                     "startColumn": 4,
-                    "startOffset": 4827,
+                    "startOffset": 4829,
                     "endColumn": 44,
-                    "endOffset": 4867
+                    "endOffset": 4869
                 },
                 "from": {
-                    "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 56,
-                        "endColumn": 44,
-                        "endOffset": 96
-                    }
+                    "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
                 }
             },
             {
                 "to": {
                     "startLine": 54,
                     "startColumn": 4,
-                    "startOffset": 4872,
+                    "startOffset": 4874,
                     "endColumn": 40,
-                    "endOffset": 4908
+                    "endOffset": 4910
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -656,9 +642,9 @@
                 "to": {
                     "startLine": 55,
                     "startColumn": 4,
-                    "startOffset": 4913,
+                    "startOffset": 4915,
                     "endColumn": 46,
-                    "endOffset": 4955
+                    "endOffset": 4957
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -668,9 +654,9 @@
                 "to": {
                     "startLine": 56,
                     "startColumn": 4,
-                    "startOffset": 4960,
+                    "startOffset": 4962,
                     "endColumn": 68,
-                    "endOffset": 5024
+                    "endOffset": 5026
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -680,21 +666,28 @@
                 "to": {
                     "startLine": 57,
                     "startColumn": 4,
-                    "startOffset": 5029,
-                    "endColumn": 53,
-                    "endOffset": 5078
+                    "startOffset": 5031,
+                    "endColumn": 55,
+                    "endOffset": 5082
                 },
                 "from": {
-                    "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
+                    "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 4423,
+                        "endColumn": 55,
+                        "endOffset": 4474
+                    }
                 }
             },
             {
                 "to": {
                     "startLine": 58,
                     "startColumn": 4,
-                    "startOffset": 5083,
+                    "startOffset": 5087,
                     "endColumn": 49,
-                    "endOffset": 5128
+                    "endOffset": 5132
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -704,9 +697,9 @@
                 "to": {
                     "startLine": 59,
                     "startColumn": 4,
-                    "startOffset": 5133,
+                    "startOffset": 5137,
                     "endColumn": 51,
-                    "endOffset": 5180
+                    "endOffset": 5184
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -716,9 +709,9 @@
                 "to": {
                     "startLine": 60,
                     "startColumn": 4,
-                    "startOffset": 5185,
+                    "startOffset": 5189,
                     "endColumn": 47,
-                    "endOffset": 5228
+                    "endOffset": 5232
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -728,9 +721,9 @@
                 "to": {
                     "startLine": 61,
                     "startColumn": 4,
-                    "startOffset": 5233,
+                    "startOffset": 5237,
                     "endColumn": 53,
-                    "endOffset": 5282
+                    "endOffset": 5286
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -740,9 +733,9 @@
                 "to": {
                     "startLine": 62,
                     "startColumn": 4,
-                    "startOffset": 5287,
+                    "startOffset": 5291,
                     "endColumn": 46,
-                    "endOffset": 5329
+                    "endOffset": 5333
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -752,9 +745,9 @@
                 "to": {
                     "startLine": 63,
                     "startColumn": 4,
-                    "startOffset": 5334,
+                    "startOffset": 5338,
                     "endColumn": 49,
-                    "endOffset": 5379
+                    "endOffset": 5383
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -764,9 +757,9 @@
                 "to": {
                     "startLine": 64,
                     "startColumn": 4,
-                    "startOffset": 5384,
+                    "startOffset": 5388,
                     "endColumn": 51,
-                    "endOffset": 5431
+                    "endOffset": 5435
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -776,9 +769,9 @@
                 "to": {
                     "startLine": 65,
                     "startColumn": 4,
-                    "startOffset": 5436,
+                    "startOffset": 5440,
                     "endColumn": 62,
-                    "endOffset": 5494
+                    "endOffset": 5498
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -788,9 +781,9 @@
                 "to": {
                     "startLine": 66,
                     "startColumn": 4,
-                    "startOffset": 5499,
+                    "startOffset": 5503,
                     "endColumn": 56,
-                    "endOffset": 5551
+                    "endOffset": 5555
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -800,9 +793,9 @@
                 "to": {
                     "startLine": 67,
                     "startColumn": 4,
-                    "startOffset": 5556,
+                    "startOffset": 5560,
                     "endColumn": 99,
-                    "endOffset": 5651
+                    "endOffset": 5655
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -812,9 +805,9 @@
                 "to": {
                     "startLine": 68,
                     "startColumn": 4,
-                    "startOffset": 5656,
+                    "startOffset": 5660,
                     "endColumn": 96,
-                    "endOffset": 5748
+                    "endOffset": 5752
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -824,9 +817,9 @@
                 "to": {
                     "startLine": 69,
                     "startColumn": 4,
-                    "startOffset": 5753,
+                    "startOffset": 5757,
                     "endColumn": 50,
-                    "endOffset": 5799
+                    "endOffset": 5803
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -836,9 +829,9 @@
                 "to": {
                     "startLine": 70,
                     "startColumn": 4,
-                    "startOffset": 5804,
+                    "startOffset": 5808,
                     "endColumn": 68,
-                    "endOffset": 5868
+                    "endOffset": 5872
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -848,9 +841,9 @@
                 "to": {
                     "startLine": 71,
                     "startColumn": 4,
-                    "startOffset": 5873,
+                    "startOffset": 5877,
                     "endColumn": 44,
-                    "endOffset": 5913
+                    "endOffset": 5917
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -860,9 +853,9 @@
                 "to": {
                     "startLine": 72,
                     "startColumn": 4,
-                    "startOffset": 5918,
+                    "startOffset": 5922,
                     "endColumn": 73,
-                    "endOffset": 5987
+                    "endOffset": 5991
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -872,9 +865,9 @@
                 "to": {
                     "startLine": 73,
                     "startColumn": 4,
-                    "startOffset": 5992,
+                    "startOffset": 5996,
                     "endColumn": 71,
-                    "endOffset": 6059
+                    "endOffset": 6063
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -884,9 +877,9 @@
                 "to": {
                     "startLine": 74,
                     "startColumn": 4,
-                    "startOffset": 6064,
+                    "startOffset": 6068,
                     "endColumn": 92,
-                    "endOffset": 6152
+                    "endOffset": 6156
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -896,9 +889,9 @@
                 "to": {
                     "startLine": 75,
                     "startColumn": 4,
-                    "startOffset": 6157,
+                    "startOffset": 6161,
                     "endColumn": 68,
-                    "endOffset": 6221
+                    "endOffset": 6225
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -908,9 +901,9 @@
                 "to": {
                     "startLine": 76,
                     "startColumn": 4,
-                    "startOffset": 6226,
+                    "startOffset": 6230,
                     "endColumn": 107,
-                    "endOffset": 6329
+                    "endOffset": 6333
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -920,9 +913,9 @@
                 "to": {
                     "startLine": 77,
                     "startColumn": 4,
-                    "startOffset": 6334,
+                    "startOffset": 6338,
                     "endColumn": 72,
-                    "endOffset": 6402
+                    "endOffset": 6406
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/strings.xml"
@@ -932,10 +925,10 @@
                 "to": {
                     "startLine": 78,
                     "startColumn": 4,
-                    "startOffset": 6407,
+                    "startOffset": 6411,
                     "endLine": 81,
                     "endColumn": 12,
-                    "endOffset": 6629
+                    "endOffset": 6633
                 },
                 "from": {
                     "file": "/Users/jamesyeh/AndroidStudioProjects/VuforiaSamples-6-2-10/app/src/main/res/values/styles.xml"

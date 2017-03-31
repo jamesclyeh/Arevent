@@ -67,6 +67,7 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
     private int textureCoordHandle;
     private int mvpMatrixHandle;
     private int texSampler2DHandle;
+    private int bgSampler2DHandle;
     private int calphaHandle;
 
     private Renderer mRenderer;
@@ -74,12 +75,16 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
     private double t0;
 
     private final Plane mPlaneObj;
+    private final Plane mBGPlaneObj;
 
     private boolean mIsActive = false;
 
     // ratio to apply so that the augmentation surrounds the vumark
     private static final float VUMARK_SCALE = 1.02f;
     private String currentVumarkIdOnCard;
+
+    private int curIndex = 0;
+    private float mScaleFactor = 1;
 
     public VuMarkRenderer(VuMark activity,
                           SampleApplicationSession session)
@@ -88,6 +93,7 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
         vuforiaAppSession = session;
         t0 = -1.0;
         mPlaneObj = new Plane();
+        mBGPlaneObj = new Plane();
 
         // SampleAppRenderer used to encapsulate the use of RenderingPrimitives setting
         // the device mode AR/VR and stereo mode
@@ -118,6 +124,9 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
         vuforiaAppSession.onSurfaceCreated();
 
         mSampleAppRenderer.onSurfaceCreated();
+
+        gl.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);           // Full brightness, 50% alpha (NEW)
+        // gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
     }
 
 
@@ -180,6 +189,8 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
                 "modelViewProjectionMatrix");
         texSampler2DHandle = GLES20.glGetUniformLocation(shaderProgramID,
             "texSampler2D");
+        bgSampler2DHandle = GLES20.glGetUniformLocation(shaderProgramID,
+                "bgSampler2D");
         calphaHandle = GLES20.glGetUniformLocation(shaderProgramID,
                 "calpha");
 
@@ -224,12 +235,13 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
         // Renders video background replacing Renderer.DrawVideoBackground()
         mSampleAppRenderer.renderVideoBackground();
 
-        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
         GLES20.glEnable(GLES20.GL_CULL_FACE);
         GLES20.glCullFace(GLES20.GL_BACK);
 
         GLES20.glEnable(GLES20.GL_BLEND);
+//        GLES20.glBlendEquation(GLES20.GL_MAX);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
         boolean gotVuMark = false;
@@ -272,6 +284,7 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
             Matrix44F modelViewMatrix_Vuforia = Tool
                 .convertPose2GLMatrix(result.getPose());
             float[] modelViewMatrix = modelViewMatrix_Vuforia.getData();
+            float[] modelViewMatrixBg = modelViewMatrix_Vuforia.getData();
 
             if (result.isOfType(VuMarkTargetResult.getClassType())) {
                 VuMarkTargetResult vmtResult = (VuMarkTargetResult) result;
@@ -302,10 +315,11 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
                         blinkVumark(true);
                     }
                 }
-                int textureIndex = 0;
+                int textureIndex = curIndex;
 
                 // deal with the modelview and projection matrices
                 float[] modelViewProjection = new float[16];
+                float[] modelViewProjectionBg = new float[16];
 
                 // Add a translation to recenter the augmentation
                 // on the VuMark center, w.r.t. the origin
@@ -313,14 +327,42 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
                 float translX = -origin.getData()[0];
                 float translY = -origin.getData()[1];
                 Matrix.translateM(modelViewMatrix, 0, translX, translY, 0);
+                Matrix.translateM(modelViewMatrixBg, 0, translX, translY, 0);
 
                 // Scales the plane relative to the target
-                float vumarkWidth = vmTgt.getSize().getData()[0] * 1.5f;
-                float vumarkHeight = vmTgt.getSize().getData()[1] * 2 * 1.5f;
-                Matrix.scaleM(modelViewMatrix, 0, vumarkWidth * VUMARK_SCALE,
+                float vumarkWidth = vmTgt.getSize().getData()[0] * 1.1f;
+                float vumarkHeight = vmTgt.getSize().getData()[1] * 1.1f;
+                Matrix.scaleM(modelViewMatrixBg, 0, vumarkWidth * VUMARK_SCALE,
                         vumarkHeight * VUMARK_SCALE, 1.0f);
+                float imageWidth = vmTgt.getSize().getData()[0] * 1.5f * mScaleFactor;
+                float imageHeight = vmTgt.getSize().getData()[1] * 2 * 1.5f * mScaleFactor;
+                Matrix.scaleM(modelViewMatrix, 0, imageWidth * VUMARK_SCALE,
+                        imageHeight * VUMARK_SCALE, 1.0f);
 
                 Matrix.multiplyMM(modelViewProjection, 0, projectionMatrix, 0, modelViewMatrix, 0);
+                Matrix.multiplyMM(modelViewProjectionBg, 0, projectionMatrix, 0, modelViewMatrixBg, 0);
+
+                GLES20.glUseProgram(shaderProgramID);
+                GLES20.glVertexAttribPointer(vertexHandle, 3, GLES20.GL_FLOAT,
+                        false, 0, mBGPlaneObj.getVertices());
+                GLES20.glVertexAttribPointer(textureCoordHandle, 2,
+                        GLES20.GL_FLOAT, false, 0, mBGPlaneObj.getTexCoords());
+                GLES20.glEnableVertexAttribArray(vertexHandle);
+                GLES20.glEnableVertexAttribArray(textureCoordHandle);
+
+                GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,
+                        mTextures.get(3).mTextureID[0]);
+                GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false,
+                        modelViewProjectionBg, 0);
+                //GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
+                GLES20.glDrawElements(GLES20.GL_TRIANGLES,
+                        mBGPlaneObj.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
+                        mBGPlaneObj.getIndices());
+
+                // disable the enabled arrays
+                GLES20.glDisableVertexAttribArray(vertexHandle);
+                GLES20.glDisableVertexAttribArray(textureCoordHandle);
 
                 // activate the shader program and bind the vertex/normal/tex coords
                 GLES20.glUseProgram(shaderProgramID);
@@ -336,9 +378,6 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
                 // activate texture 0, bind it, and pass to shader
                 GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
                 GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,
-                        mTextures.get(textureIndex+1).mTextureID[0]);
-                GLES20.glActiveTexture(GLES20.GL_TEXTURE1);
-                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,
                         mTextures.get(textureIndex).mTextureID[0]);
                 GLES20.glUniform1i(texSampler2DHandle, 0);
                 GLES20.glUniform1f(calphaHandle, isMainVuMark ? blinkVumark(false) : 1.0f);
@@ -351,10 +390,9 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
                 GLES20.glDrawElements(GLES20.GL_TRIANGLES,
                         mPlaneObj.getNumObjectIndex(), GLES20.GL_UNSIGNED_SHORT,
                         mPlaneObj.getIndices());
-
-                // disable the enabled arrays
                 GLES20.glDisableVertexAttribArray(vertexHandle);
                 GLES20.glDisableVertexAttribArray(textureCoordHandle);
+
                 SampleUtils.checkGLError("Render Frame");
             }
         }
@@ -390,6 +428,14 @@ public class VuMarkRenderer implements GLSurfaceView.Renderer, SampleAppRenderer
     public void setTextures(Vector<Texture> textures)
     {
         mTextures = textures;
+    }
+
+    public void setTextureIndex(int i) {
+        curIndex = i;
+    }
+
+    public void setScaleFactor(float f) {
+        mScaleFactor = Math.min(2f, Math.max(mScaleFactor + 0.4f * (f-1), 0.5f));
     }
 
     private String instanceIdToType(InstanceId instanceId)

@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
@@ -76,6 +77,7 @@ public class VuMark extends Activity implements SampleApplicationControl,
     private VuMarkRenderer mRenderer;
     
     private GestureDetector mGestureDetector;
+    private ScaleGestureDetector mScaleDetector;
     
     // The textures we will use for rendering:
     private Vector<Texture> mTextures;
@@ -93,14 +95,18 @@ public class VuMark extends Activity implements SampleApplicationControl,
     private TextView _textType;
     private TextView _textValue;
     private ImageView _instanceImageView;
+    private ImageView image1;
+    private ImageView image2;
+    private ImageView image3;
 
     // Alert Dialog used to display SDK errors
     private AlertDialog mErrorDialog;
     
     boolean mIsDroidDevice = false;
 
-    Bitmap mCardImage;
-    
+    Bitmap mCardImage1;
+    Bitmap mCardImage2;
+    Bitmap mCardImage3;
     
     // Called when the activity first starts or the user navigates back to an
     // activity.
@@ -118,9 +124,19 @@ public class VuMark extends Activity implements SampleApplicationControl,
             .initAR(this, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         
         mGestureDetector = new GestureDetector(this, new GestureListener());
-        
-        // Load any sample specific textures:
-        mTextures = new Vector<Texture>();
+
+        mScaleDetector =
+                new ScaleGestureDetector(this, new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+                    @Override
+                    public boolean onScale(ScaleGestureDetector detector) {
+                        mRenderer.setScaleFactor(detector.getScaleFactor());
+                        return true;
+                    }
+                });
+
+
+                        // Load any sample specific textures:
+                        mTextures = new Vector<Texture>();
         loadTextures();
         
         mIsDroidDevice = Build.MODEL.toLowerCase().startsWith(
@@ -141,14 +157,44 @@ public class VuMark extends Activity implements SampleApplicationControl,
                 return false;
             }
         });
+
+        image1 = (ImageView) _viewCard.findViewById(R.id.instance_image1);
+        image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderer.setTextureIndex(0);
+                Log.d(LOGTAG, "Image 1 click");
+            }
+        });
+        image2 = (ImageView) _viewCard.findViewById(R.id.instance_image2);
+        image2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderer.setTextureIndex(1);
+                Log.d(LOGTAG, "Image 2 click");
+            }
+        });
+        image3 = (ImageView) _viewCard.findViewById(R.id.instance_image3);
+        image3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRenderer.setTextureIndex(2);
+                Log.d(LOGTAG, "Image 3 click");
+            }
+        });
+
+
+
         addContentView(_viewCard, layoutParamsControl);
 
-        _textType = (TextView) _viewCard.findViewById(R.id.text_type);
-        _textValue = (TextView) _viewCard.findViewById(R.id.text_value);
-        _instanceImageView = (ImageView) _viewCard.findViewById(R.id.instance_image);
+//        _textType = (TextView) _viewCard.findViewById(R.id.text_type);
+//        _textValue = (TextView) _viewCard.findViewById(R.id.text_value);
+//        _instanceImageView = (ImageView) _viewCard.findViewById(R.id.instance_image);
 
         try {
-            mCardImage = BitmapFactory.decodeStream(getApplicationContext().getAssets().open("iron_man.png"));
+            mCardImage2 = BitmapFactory.decodeStream(getApplicationContext().getAssets().open("starwars_upright.png"));
+            mCardImage3 = BitmapFactory.decodeStream(getApplicationContext().getAssets().open("whenever_upright.png"));
+            mCardImage1 = BitmapFactory.decodeStream(getApplicationContext().getAssets().open("ct_upright.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -168,12 +214,12 @@ public class VuMark extends Activity implements SampleApplicationControl,
             return true;
         }
         
-        
         @Override
         public boolean onSingleTapUp(MotionEvent e)
         {
             // Generates a Handler to trigger autofocus
             // after 1 second
+            Log.e(LOGTAG, "TapUp");
             autofocusHandler.postDelayed(new Runnable()
             {
                 public void run()
@@ -194,11 +240,14 @@ public class VuMark extends Activity implements SampleApplicationControl,
     // We want to load specific textures from the APK, which we will later use
     // for rendering.
     
-    private void loadTextures()
-    {
-        mTextures.add(Texture.loadTextureFromApk("iron_man.png",
+    private void loadTextures() {
+        mTextures.add(Texture.loadTextureFromApk("ct.png",
                 getAssets()));
-        mTextures.add(Texture.loadTextureFromApk("butter_fly.png",
+        mTextures.add(Texture.loadTextureFromApk("starwars.png",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("whenever_clean.png",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("bg2.png",
                 getAssets()));
     }
     
@@ -337,16 +386,18 @@ public class VuMark extends Activity implements SampleApplicationControl,
             @Override
             public void run() {
                 // if scard is already visible with same VuMark, do nothing
-                if ((_viewCard.getVisibility() == View.VISIBLE) && (_textValue.getText().equals(value))) {
+                if ((_viewCard.getVisibility() == View.VISIBLE)) {// && (_textValue.getText().equals(value))) {
                     return;
                 }
                 Animation bottomUp = AnimationUtils.loadAnimation(context,
                         R.anim.bottom_up);
 
-                _textType.setText(type);
-                _textValue.setText(value);
+//                _textType.setText(type);
+//                _textValue.setText(value);
                 if (bitmap != null) {
-                    _instanceImageView.setImageBitmap(mCardImage);
+                    image1.setImageBitmap(mCardImage1);
+                    image2.setImageBitmap(mCardImage2);
+                    image3.setImageBitmap(mCardImage3);
                 }
                 _viewCard.bringToFront();
                 _viewCard.setVisibility(View.VISIBLE);
@@ -365,8 +416,8 @@ public class VuMark extends Activity implements SampleApplicationControl,
             if (_viewCard.getVisibility() != View.VISIBLE) {
                 return;
             }
-            _textType.setText("");
-            _textValue.setText("");
+            // _textType.setText("");
+            // _textValue.setText("");
             Animation bottomDown = AnimationUtils.loadAnimation(context,
                     R.anim.bottom_down);
 
@@ -474,7 +525,7 @@ public class VuMark extends Activity implements SampleApplicationControl,
             else
                 Log.e(LOGTAG, "Unable to enable continuous autofocus");
             
-            mSampleAppMenu = new SampleAppMenu(this, this, "VuMark",
+            mSampleAppMenu = new SampleAppMenu(this, this, "Howard's Ink",
                 mGlView, mUILayout, null);
             setSampleAppMenuSettings();
             
@@ -604,8 +655,9 @@ public class VuMark extends Activity implements SampleApplicationControl,
         // Process the Gestures
         if (mSampleAppMenu != null && mSampleAppMenu.processEvent(event))
             return true;
-        
-        return mGestureDetector.onTouchEvent(event);
+
+        return (mGestureDetector.onTouchEvent(event) || mScaleDetector.onTouchEvent(event));
+
     }
     
     
